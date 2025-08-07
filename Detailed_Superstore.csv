@@ -1,0 +1,19 @@
+Order ID,Order Date,Ship Date,Ship Mode,Customer ID,Customer Name,Segment,Country,City,State,Region,Category,Sub-Category,Product Name,Sales,Quantity,Discount,Profit
+CA-2016-152156,08-11-2016,11-11-2016,Second Class,CG-12520,Claire Gute,Consumer,United States,Henderson,Kentucky,South,Furniture,Bookcases,Bush Somerset Collection Bookcase,261.96,2,0,41.9136
+CA-2016-152156,08-11-2016,11-11-2016,Second Class,CG-12520,Claire Gute,Consumer,United States,Henderson,Kentucky,South,Furniture,Chairs,Hon Deluxe Fabric Upholstered Stacking Chairs,731.94,3,0,219.582
+CA-2016-138688,12-06-2016,16-06-2016,Second Class,DV-13045,Darrin Van Huff,Corporate,United States,Los Angeles,California,West,Office Supplies,Labels,Avery 488,14.62,2,0,6.8714
+US-2015-108966,11-10-2015,18-10-2015,Standard Class,SO-20335,Sean O'Donnell,Consumer,United States,Fort Lauderdale,Florida,South,Furniture,Furnishings,Eldon Expressions Wood and Plastic Desk Accessories,957.58,5,0.45,-383.031
+US-2015-108966,11-10-2015,18-10-2015,Standard Class,SO-20335,Sean O'Donnell,Consumer,United States,Fort Lauderdale,Florida,South,Furniture,Furnishings,Eldon Expressions Wood and Plastic Desk Accessories,22.37,2,0.2,2.5164
+CA-2017-167164,09-07-2017,12-07-2017,First Class,BH-11710,Bruce Holt,Corporate,United States,Columbus,Ohio,East,Technology,Phones,Cisco SPA525G2 IP Phone,230.99,2,0.1,51.9
+CA-2017-167164,09-07-2017,12-07-2017,First Class,BH-11710,Bruce Holt,Corporate,United States,Columbus,Ohio,East,Technology,Accessories,Logitech Wireless Mouse,19.99,1,0,5
+CA-2018-127294,15-04-2018,20-04-2018,Same Day,JL-15835,Joel Lee,Home Office,United States,San Francisco,California,West,Office Supplies,Binders,Cardinal Slant-D Ring Binder,13.99,1,0.2,2.45
+US-2018-156709,05-12-2018,10-12-2018,Standard Class,AB-10150,Aaron Bergman,Consumer,United States,New York City,New York,East,Technology,Copiers,Canon ImageCLASS 2200,3700,1,0,889
+US-2018-156709,05-12-2018,10-12-2018,Standard Class,AB-10150,Aaron Bergman,Consumer,United States,New York City,New York,East,Technology,Machines,HP OfficeJet Pro 7740,699.99,1,0.15,120
+CA-2016-138688,12-06-2016,16-06-2016,Second Class,DV-13045,Darrin Van Huff,Corporate,United States,Los Angeles,California,West,Office Supplies,Labels,Avery 488,14.62,5,0,6.8714
+US-2015-108966,11-10-2015,18-10-2015,Standard Class,SO-20335,Sean O'Donnell,Consumer,United States,Fort Lauderdale,Florida,South,Furniture,Furnishings,Eldon Expressions Wood and Plastic Desk Accessories,957.58,6,0.45,-383.031
+US-2015-108966,11-10-2015,18-10-2015,Standard Class,SO-20335,Sean O'Donnell,Consumer,United States,Fort Lauderdale,Florida,South,Furniture,Furnishings,Eldon Expressions Wood and Plastic Desk Accessories,22.37,3,0.2,2.5164
+CA-2017-167164,09-07-2017,12-07-2017,First Class,BH-11710,Bruce Holt,Corporate,United States,Columbus,Ohio,East,Technology,Phones,Cisco SPA525G2 IP Phone,230.99,4,0.1,51.9
+CA-2017-167164,09-07-2017,12-07-2017,First Class,BH-11710,Bruce Holt,Corporate,United States,Columbus,Ohio,East,Technology,Accessories,Logitech Wireless Mouse,19.99,2,0,5
+CA-2018-127294,15-04-2018,20-04-2018,Same Day,JL-15835,Joel Lee,Home Office,United States,San Francisco,California,West,Office Supplies,Binders,Cardinal Slant-D Ring Binder,13.99,4,0.2,2.45
+US-2018-156709,05-12-2018,10-12-2018,Standard Class,AB-10150,Aaron Bergman,Consumer,United States,New York City,New York,East,Technology,Copiers,Canon ImageCLASS 2200,3700,5,0,889
+US-2018-156709,05-12-2018,10-12-2018,Standard Class,AB-10150,Aaron Bergman,Consumer,United States,New York City,New York,East,Technology,Machines,HP OfficeJet Pro 7740,699.99,4,0.15,120

@@ -2,64 +2,68 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
+
 st.set_page_config(layout="wide")
-st.title("📊 Superstore Sales Dashboard")
+st.title("📈 Sales Dashboard")
 
-# Load the dataset
-@st.cache_data
-def load_data():
-    df = pd.read_csv("Superstore.csv", encoding='ISO-8859-1')
-    df['Order Date'] = pd.to_datetime(df['Order Date'])
-    df['Year'] = df['Order Date'].dt.year
-    df['Month'] = df['Order Date'].dt.month_name()
-    return df
+# File uploader
+uploaded_file = st.file_uploader("Upload your CSV file", type=["csv"])
 
-df = load_data()
+if uploaded_file:
+    df = pd.read_csv(uploaded_file)
 
+    st.subheader("📄 Preview of Uploaded Data")
+    st.dataframe(df.head())
 
-# Sidebar filters
-st.sidebar.header("Filter Data")
-country = st.sidebar.multiselect("Select Country", df['Country'].unique())
-category = st.sidebar.multiselect("Select Category", df['Category'].unique())
-year = st.sidebar.multiselect("Select Year", df['Year'].unique())
+    # Identify date-like columns from object dtype columns
+    possible_dates = []
+    for col in df.select_dtypes(include=['object']).columns:
+        try:
+            converted = pd.to_datetime(df[col], errors='coerce')
+            if converted.notna().sum() > 0:
+                possible_dates.append(col)
+        except:
+            pass
 
-# Apply filters
-filtered_df = df.copy()
-if country:
-    filtered_df = filtered_df[filtered_df['Country'].isin(country)]
-if category:
-    filtered_df = filtered_df[filtered_df['Category'].isin(category)]
-if year:
-    filtered_df = filtered_df[filtered_df['Year'].isin(year)]
+    date_column = None
+    if possible_dates:
+        date_column = st.selectbox("Select Date Column (optional)", possible_dates)
 
+    # Filters based on categorical columns
+    st.sidebar.header("🔎 Filter Data")
+    for col in df.select_dtypes(include=['object', 'category']).columns:
+        unique_vals = df[col].dropna().unique()
+        selected_vals = st.sidebar.multiselect(f"Filter by {col}", unique_vals, default=unique_vals)
+        df = df[df[col].isin(selected_vals)]
 
-total_sales = round(filtered_df['Sales'].sum(), 2)
-total_profit = round(filtered_df['Profit'].sum(), 2)
-num_orders = filtered_df['Order ID'].nunique()
+    # Convert date column if selected
+    if date_column:
+        df[date_column] = pd.to_datetime(df[date_column], errors='coerce')
+        df = df.dropna(subset=[date_column])
+        df['Month'] = df[date_column].dt.to_period("M").astype(str)
 
-col1, col2, col3 = st.columns(3)
-col1.metric("Total Sales ($)", f"{total_sales:,}")
-col2.metric("Total Profit ($)", f"{total_profit:,}")
-col3.metric("Number of Orders", num_orders)
+    # Identify numeric columns
+    numeric_cols = df.select_dtypes(include='number').columns.tolist()
+    if len(numeric_cols) >= 1:
+        x_axis = st.selectbox("X-axis (Categorical)", df.select_dtypes(include=['object', 'category']).columns)
+        y_axis = st.selectbox("Y-axis (Numeric)", numeric_cols)
 
+        # Grouped bar chart
+        st.subheader("📊 Bar Chart")
+        bar_data = df.groupby(x_axis)[y_axis].sum().reset_index()
+        bar_fig = px.bar(bar_data, x=x_axis, y=y_axis)
+        st.plotly_chart(bar_fig, use_container_width=True)
 
-# Sales by Category
-cat_chart = px.bar(
-    filtered_df.groupby('Category')['Sales'].sum().reset_index(),
-    x='Category', y='Sales', title='Sales by Category'
-)
-st.plotly_chart(cat_chart, use_container_width=True)
+        # Pie chart
+        st.subheader("🥧 Pie Chart")
+        pie_fig = px.pie(bar_data, names=x_axis, values=y_axis)
+        st.plotly_chart(pie_fig, use_container_width=True)
 
-# Profit by Region
-region_chart = px.pie(
-    filtered_df.groupby('Region')['Profit'].sum().reset_index(),
-    names='Region', values='Profit', title='Profit by Region'
-)
-st.plotly_chart(region_chart, use_container_width=True)
-
-# Sales Over Time
-time_chart = px.line(
-    filtered_df.groupby('Order Date')['Sales'].sum().reset_index(),
-    x='Order Date', y='Sales', title='Sales Over Time'
-)
-st.plotly_chart(time_chart, use_container_width=True)
+        # Line chart over time
+        if date_column:
+            st.subheader("📈 Time Series Chart")
+            time_data = df.groupby(date_column)[y_axis].sum().reset_index()
+            time_fig = px.line(time_data, x=date_column, y=y_axis)
+            st.plotly_chart(time_fig, use_container_width=True)
+    else:
+        st.warning("No numeric columns found in the dataset to plot charts.")
