@@ -59,7 +59,7 @@ def format_number(num):
     return f"${num:,.2f}"
 
 # --- MAIN DASHBOARD LOGIC ---
-st.title("💡 Dynamic Sales Dashboard")
+st.title("💡 Sales Dashboard")
 
 # --- SIDEBAR ---
 with st.sidebar:
